@@ -1,5 +1,25 @@
 // COPY of https://p5js.org/examples/interaction-snake-game.html
 //
+var host = "cpsc484-01.yale.internal:8888";
+$(document).ready(function() {
+  frames.start();
+});
+
+var frames = {
+  socket: null,
+
+  start: function() {
+    var url = "ws://" + host + "/frames";
+    frames.socket = new WebSocket(url);
+    frames.socket.onmessage = function (event) {
+        frames.get_left_wrist_translation(JSON.parse(event.data));
+      }
+  },
+
+  get_left_wrist_translation: function (frame) {
+    console.log(frame.people[0].joints[7].position.x); // Joint 7: WRIST_LEFT
+  }
+};
 //
 // the snake is divided into small segments, which are drawn and edited on each 'draw' call
 let numSegments = 10;
