@@ -14,7 +14,7 @@ var frames = {
     frames.socket.onmessage = function (event) {
         var command = frames.get_left_wrist_command(JSON.parse(event.data));
         if (command !== null) {
-          console.log(command);
+          sendWristCommand(command);
         }
       }
   },
@@ -33,15 +33,15 @@ var frames = {
 
     if (left_wrist_x < 200 && left_wrist_x > -200) {
       if (left_wrist_y > 500) {
-        command = 'up';
+        command = 73; // UP
       } else if (left_wrist_y < 100) {
-        command = 'down';
+        command = 75; // DOWN
       }
     } else if (left_wrist_y < 500 && left_wrist_y > 100) {
       if (left_wrist_x > 200) {
-        command = 'right';
+        command = 76; // RIGHT
       } else if (left_wrist_x < -200) {
-        command = 'left';
+        command = 74; // LEFT
       }
     }
     return command;
@@ -70,7 +70,7 @@ function setup() {
   scoreElem.style('color', 'white');
 
   createCanvas(500, 500);
-  frameRate(15);
+  frameRate(3);
   stroke(255);
   strokeWeight(10);
   updateFruitCoordinates();
@@ -188,8 +188,8 @@ function updateFruitCoordinates() {
   yFruit = floor(random(10, (height - 100) / 10)) * 10;
 }
 
-function keyPressed() {
-  switch (keyCode) {
+function sendWristCommand(command) {
+  switch (command) {
     case 74:
       if (direction !== 'right') {
         direction = 'left';
@@ -211,5 +211,6 @@ function keyPressed() {
       }
       break;
   }
+  console.log(direction);
 }
 
