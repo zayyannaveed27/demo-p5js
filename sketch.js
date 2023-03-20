@@ -12,15 +12,42 @@ var frames = {
     var url = "ws://" + host + "/frames";
     frames.socket = new WebSocket(url);
     frames.socket.onmessage = function (event) {
-        frames.get_left_wrist_translation(JSON.parse(event.data));
+        var command = frames.get_left_wrist_command(JSON.parse(event.data));
+        if (command !== null) {
+          console.log(command);
+        }
       }
   },
 
-  get_left_wrist_translation: function (frame) {
-    console.log(frame.people[0].joints[7].position.x); // Joint 7: WRIST_LEFT
+  get_left_wrist_command: function (frame) {
+    var command = null;
+    if (frame.people.length < 1) {
+      return command;
+    }
+
+    // Normalize by subtracting the root (pelvis) joint coordinates
+    var pelvis_x = frame.people[0].joints[0].position.x;
+    var pelvis_y = frame.people[0].joints[0].position.y;
+    var left_wrist_x = (frame.people[0].joints[7].position.x - pelvis_x) * -1;
+    var left_wrist_y = (frame.people[0].joints[7].position.y - pelvis_y) * -1;
+
+    if (left_wrist_x < 200 && left_wrist_x > -200) {
+      if (left_wrist_y > 500) {
+        command = 'up';
+      } else if (left_wrist_y < 100) {
+        command = 'down';
+      }
+    } else if (left_wrist_y < 500 && left_wrist_y > 100) {
+      if (left_wrist_x > 200) {
+        command = 'right';
+      } else if (left_wrist_x < -200) {
+        command = 'left';
+      }
+    }
+    return command;
   }
 };
-//
+
 // the snake is divided into small segments, which are drawn and edited on each 'draw' call
 let numSegments = 10;
 let direction = 'right';
