@@ -62,18 +62,24 @@ let yCor = [];
 let xFruit = 0;
 let yFruit = 0;
 let scoreElem;
+let scoreContainer = document.getElementById('score-container');
+let startButton = document.getElementById('start-button');
+startButton.addEventListener("click", () => {
+  console.log("Test");
+  window.location.reload();
+});
 
 function setup() {
-  scoreElem = createDiv('Score = 0');
-  scoreElem.position(20, 20);
-  scoreElem.id = 'score';
-  scoreElem.style('color', 'white');
-
-  createCanvas(500, 500);
-  frameRate(3);
+  let snakeCanvas = createCanvas(windowWidth/2, windowHeight/2);
+  snakeCanvas.parent("canvas-container");
+  frameRate(15);
   stroke(255);
   strokeWeight(10);
   updateFruitCoordinates();
+
+  scoreElem = createDiv('Score = 0');
+  scoreElem.parent("score-container");
+  scoreElem.id = 'score';
 
   for (let i = 0; i < numSegments; i++) {
     xCor.push(xStart + i * diff);
