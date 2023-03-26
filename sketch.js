@@ -63,16 +63,22 @@ let xFruit = 0;
 let yFruit = 0;
 let scoreElem;
 let scoreContainer = document.getElementById('score-container');
+let handContainer = document.getElementById('hand-container');
+
+let leftArrow = document.getElementById('left-arrow');
+let rightArrow = document.getElementById('right-arrow');
+let upArrow = document.getElementById('up-arrow');
+let downArrow = document.getElementById('down-arrow');
+
 let startButton = document.getElementById('start-button');
 startButton.addEventListener("click", () => {
-  console.log("Test");
   window.location.reload();
 });
 
 function setup() {
   let snakeCanvas = createCanvas(windowWidth/2, windowHeight/2);
   snakeCanvas.parent("canvas-container");
-  frameRate(15);
+  frameRate(3);
   stroke(255);
   strokeWeight(10);
   updateFruitCoordinates();
@@ -93,6 +99,7 @@ function draw() {
     line(xCor[i], yCor[i], xCor[i + 1], yCor[i + 1]);
   }
   updateSnakeCoordinates();
+  updateHandContainer();
   checkGameStatus();
   checkForFruit();
 }
@@ -129,6 +136,29 @@ function updateSnakeCoordinates() {
     case 'down':
       xCor[numSegments - 1] = xCor[numSegments - 2];
       yCor[numSegments - 1] = yCor[numSegments - 2] + diff;
+      break;
+  }
+}
+
+function updateHandContainer() {
+  // set all arrows to white
+  leftArrow.className = 'left-arrow';
+  upArrow.className = 'up-arrow';
+  rightArrow.className = 'right-arrow';
+  downArrow.className = 'down-arrow';
+
+  switch (direction) {
+    case 'right':
+      rightArrow.className += ' active-right';
+      break;
+    case 'up':
+      upArrow.className += ' active-up';
+      break;
+    case 'left':
+      leftArrow.className += ' active-left';
+      break;
+    case 'down':
+      downArrow.className += ' active-down';
       break;
   }
 }
