@@ -1,8 +1,9 @@
 // Adapted from https://p5js.org/examples/interaction-snake-game.html
 //
-var host = "cpsc484-01.yale.internal:8888";
+var host = "localhost:4444";
 $(document).ready(function() {
   frames.start();
+  twod.start();
 });
 
 var frames = {
@@ -54,6 +55,21 @@ var frames = {
   }
 };
 
+var twod = {
+  socket: null,
+
+  start: function() {
+    var url = "ws://" + host + "/twod";
+    twod.socket = new ReconnectingWebSocket(url);
+    twod.socket.onmessage = function(event) {
+      twod.show(JSON.parse(event.data));
+    }
+  },
+
+  show: function(twod) {
+    $('.twod').attr("src", 'data:image/pnjpegg;base64,'+twod.src);
+  }
+};
 // the snake is divided into small segments, which are drawn and edited on each 'draw' call
 let numSegments = 10;
 let direction = 'right';
