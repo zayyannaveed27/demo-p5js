@@ -60,7 +60,7 @@ var twod = {
 
   start: function() {
     var url = "ws://" + host + "/twod";
-    twod.socket = new ReconnectingWebSocket(url);
+    twod.socket = new WebSocket(url);
     twod.socket.onmessage = function(event) {
       twod.show(JSON.parse(event.data));
     }
