@@ -47,7 +47,7 @@ html, body {
 
   .hands {
     height: 100px;
-    background-color:blueviolet;
+    background-color: #b8937a;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +59,7 @@ html, body {
     height: 50px;
     width: 50px;
     color: white;
-    background-color: black;
+    background-color: #fcc006;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -71,7 +71,7 @@ html, body {
     height: 0;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    border-right: 15px solid white;
+    border-right: 15px solid #ca0147;
     margin: 2rem;
     margin-right: 35px;
   }
@@ -81,7 +81,7 @@ html, body {
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 15px solid white;
+    border-bottom: 15px solid #ca0147;
     margin: 2rem;
     margin-bottom: 35px;
   }
@@ -91,7 +91,7 @@ html, body {
     height: 0;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    border-left: 15px solid white;
+    border-left: 15px solid #ca0147;
     margin: 2rem;
     margin-left: 35px;
   }
@@ -101,23 +101,23 @@ html, body {
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-top: 15px solid white;
+    border-top: 15px solid #ca0147;
     margin: 2rem;
     margin-top: 35px;
   }
 
   .active-left {
-    border-right: 15px solid blueviolet;
+    border-right: 15px solid #c1f80a;
   }
 
   .active-up {
-    border-bottom: 15px solid blueviolet;
+    border-bottom: 15px solid #c1f80a;
   }
 
   .active-right {
-    border-left: 15px solid blueviolet;
+    border-left: 15px solid #c1f80a;
   }
 
   .active-down {
-    border-top: 15px solid blueviolet;
+    border-top: 15px solid #c1f80a;
   }
