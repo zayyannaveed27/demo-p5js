@@ -59,7 +59,7 @@ html, body {
     height: 50px;
     width: 50px;
     color: white;
-    background-color: #fcc006;
+    background-color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -107,17 +107,17 @@ html, body {
   }
 
   .active-left {
-    border-right: 15px solid #c1f80a;
+    border-right: 15px solid orangered;
   }
 
   .active-up {
-    border-bottom: 15px solid #c1f80a;
+    border-bottom: 15px solid orangered;
   }
 
   .active-right {
-    border-left: 15px solid #c1f80a;
+    border-left: 15px solid orangered;
   }
 
   .active-down {
-    border-top: 15px solid #c1f80a;
+    border-top: 15px solid orangered;
   }
